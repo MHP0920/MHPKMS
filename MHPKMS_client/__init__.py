@@ -2,7 +2,7 @@ from requests import post
 from json import loads
 
 ENDPOINT = 'https://api.mhpkms.mhpteam.dev'
-ACTIVE = '/api/v1/app/auth/validate'
+ACTIVE = '/api/v1/public/app/auth/validate'
 
 class Client:
     def __init__(self, client=None, appid=None) -> None:

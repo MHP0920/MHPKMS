@@ -5,7 +5,7 @@ with open("README.md", "r", encoding='utf-8') as fh:
 
 setuptools.setup(
     name="MHPKMS",                     # This is the name of the package
-    version="1.0.0.1",                        # The initial release version
+    version="1.0.0.2",                        # The initial release version
     author="MHP",                     # Full name of the author
     author_email='py.hacker.hieu@gmail.com',
     keywords=['MHP', "KMS", 'trial', 'python', 'python3'],
