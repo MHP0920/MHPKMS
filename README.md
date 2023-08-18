@@ -13,11 +13,11 @@
 Đây là hướng dẫn sử dụng chính thức của MHP Key Management Service (MHPKMS), nơi bạn có thể tìm thấy những thông tin chi
 tiết về cách sử dụng.
 
-MHPKMS hỗ trợ ứng dụng chạy trên [cloud (online)](/docs/API/client/online) cũng như chạy [trên máy (offline)](/docs/API/client/offline).
+MHPKMS hỗ trợ ứng dụng chạy trên [cloud (online)](https://mhpkms.mhpteam.dev/docs/client/online) cũng như chạy [trên máy (offline)](https://mhpkms.mhpteam.dev/docs/client/offline).
 
-Khi cần trợ giúp có thể tham khảo [Những câu hỏi thường gặp](/faq). Ngoài ra bạn cũng có thể hỏi đáp trong nhóm [discord](https://discord.gg/bB365YwE) của chúng tôi.
+Khi cần trợ giúp có thể tham khảo [Những câu hỏi thường gặp](https://mhpkms.mhpteam.dev/faq). Ngoài ra bạn cũng có thể hỏi đáp trong nhóm [discord](https://discord.gg/bB365YwE) của chúng tôi.
 
-Nếu phát hiện lỗi hoặc có ý kiến đóng góp, vui lòng tạo [Issue](/).
+Nếu phát hiện lỗi hoặc có ý kiến đóng góp, vui lòng tạo [Issue](https://github.com/MHP0920/MHPKMS/issues).
 
 ___
 
@@ -47,10 +47,13 @@ cd MHPKMS
 Nếu tải từ latest release, bạn hãy giải nén và truy cập vào thư mục được giải nén.
 ```python
 import MHPKMS_client
-API = MHPKMS_client.Client()
+API = MHPKMS_client.Client(
+    client: str = "client-key",
+    appid: str = "appid"
+)
 ```
 
-**Note: Các bạn không nên sử dụng bản Online cho sản phẩm Offline và ngược lại. [Xem thêm](/)**
+**Note: Các bạn không nên sử dụng bản Online cho sản phẩm Offline và ngược lại. [Xem thêm](https://mhpkms.mhpteam.dev/docs/client/offline)**
 
 
 ### Cập nhật
@@ -63,8 +66,8 @@ pip install MHPKMS --upgrade
 ____
 > #### Offline
 >
-Bản offline sẽ tự động thông báo nếu người dùng bật [ensure_checksum](/docs/API/usage#ensure_checksum) 
-hoặc có thể [tải xuống](https://github.com/MHP0920/python-protection-project).
+Bản offline sẽ tự động thông báo nếu người dùng bật [ensure_checksum](https://mhpkms.mhpteam.dev/docs/usage#ensure_checksum-offline-version-only) 
+hoặc có thể [tải xuống](https://github.com/MHP0920/MHPKMS).
 
 ## How it works?
 
@@ -96,9 +99,10 @@ Nhưng với MHPKMS, những vấn đề trên đã được giải quyết. V�
 ```python
 import MHPKMS_client # Load thư viện
 
-API = MHPKMS_client.Client() # Khởi tạo API
-API.set_client("client-key") # Thêm client key (Thêm trước)
-API.set_appid("appid") # Thêm appid (Thêm trước)
+API = MHPKMS_client.Client(
+    client: str = "client-key",
+    appid: str = "appid
+) # Khởi tạo API
 
 key = input("Nhập key được cấp từ trước: ") # Nhập vào key đã được cấp, những người được chỉ định sở hữu key
 
@@ -114,37 +118,9 @@ là bất khả thi.
 ## Contributions
 ____
 ### Contributors
-- [Trần Minh Hiếu](https://www.facebook.com/py.hacker.hieu)
-- [Notch Apple](https://www.facebook.com/notchapple1703)
-- [Lê Nguyễn Quỳnh Hương](https://www.facebook.com/profile.php?id=100082163187491)
+- See here: [Contributors](https://mhpkms.mhpteam.dev/contributors)
 
 Want to become a contributor? [Join us](https://discord.gg/PFTYkjWWEW)
-
-### Roles
-- **Head Developer**: Trần Minh Hiếu
-- **Security Researcher**: Trần Minh Hiếu
-- **API Development**: Trần Minh Hiếu
-- **CLI Development**: Trần Minh Hiếu
-- **Server Management**: Trần Minh Hiếu
-- **Database Management**: Trần Minh Hiếu
-- **Payment Information**: Trần Minh Hiếu
-- **Payment Designer**: Notch Apple
-- **Debuggers & Security Testers**: Trần Minh Hiếu & Notch Apple
-- **Exploiters**: Notch Apple
-- **Documentations Arrangement**: Trần Minh Hiếu & Notch Apple
-- **Icon Designer**: Lê Nguyễn Quỳnh Hương
-- **Thumbnail Designer**: Lê Nguyễn Quỳnh Hương
-- **Bootstrap**: Docusaurus
-
-### J4F🐧
-**Cảm ơn** *electricity, tinh hoa đất trời, dòng suối thiên nhiên* đã hỗ trợ mọi người trong quá trình làm  
-**Cảm ơn** *laptop* đã gồng gánh 60 tabs để nghiên cứu  
-**Cảm ơn** *Microsoft* đã tạo ra vertical tab cho Edge nên Trần Minh Hiếu không chết oan  
-**Cảm ơn** *VSCODE* đã gánh Trần Minh Hiếu 10 tabs code + 60 tabs Edge mà không crash  
-**Cảm ơn** *Spotify* đã bật nhạc suốt ngày đêm để hồi máu cho Trần Minh Hiếu  
-**Cảm ơn** *Mozilla* đã tạo ra Firefox vì Firefox đẹp hơn Chrome 😱 - Notch Apple -  
-**Cảm ơn** *Jetbrains* đã tạo ra Pycharm vì Pycharm iz da bezt 🗿 - Notch Apple -  
-**Cảm ơn** *C418 và Adrian Talens* đã bật nhạc hồi máu cho Notch Apple  
 
 ## Copyright
 Copyright © MHP 2023. _This work is licensed under a [CC BY-ND 4.0 license](http://creativecommons.org/licenses/by-nd/4.0/)._
