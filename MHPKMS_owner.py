@@ -220,17 +220,9 @@ def _salty_decrypt(message):
 _inject_function = '''
 import os as _os
 import sys as _sys
-from _sha512 import sha512 as _sha512
+try: from _sha512 import sha512 as _sha512
+except: from hashlib import sha512 as _sha512
 strs = 'abcdefghijklmnopqrstuvwxyz'
-def _shifttext(shift, txt):
-    data = []
-    for i in txt:                     
-        if i.strip() and i in strs:                 
-            data.append(strs[(strs.index(i) + shift) % 26])    
-        else:
-            data.append(i)          
-    output = ''.join(data)
-    return output
 def _salty_decrypt(message):
     lst_salty = [ord(x) for x in message.split('^')[1].split('*')[0]]
     return ''.join([chr(ord(c) - lst_salty.pop(0)) if lst_salty else chr(ord(c)) for c in message.split('^')[0]])
@@ -238,12 +230,11 @@ def _salty_decrypt(message):
 _inject_data_0 = 'MHPKMS_client.pyd'
 _inject_data_1 = ['MHPKMS_client', 'MHPKMS_client.pyc',
                   'MHPKMS_client.py', 'MHPKMS_client.cp311-win_amd64.pyd']
-_inject_sha = get_checksum()
-_inject_shift = random.randint(1, 52)
+_inject_sha = get_checksum()['hash']
 _inject_payload = '''
-_dt0 = _shifttext({}, _salty_decrypt(''.join({}))) # data 0
-_dt1 = [_shifttext({}, _salty_decrypt(''.join(x))) for x in {}] # data 1
-_sa = _shifttext({}, _salty_decrypt(''.join({}))) # sha
+_dt0 = _salty_decrypt(''.join({})) # data 0
+_dt1 = [_salty_decrypt(''.join(x)) for x in {}] # data 1
+_sa = _salty_decrypt(''.join({})) # sha
 _ensure = []
 _exited = False
 for _i in _dt1:
@@ -265,13 +256,11 @@ while _exited:
 
 
 def obfuscate():
-    _inject_data_0_coded = list(salty_hash(
-        shifttext(_inject_shift, _inject_data_0)))
-    _inject_data_1_coded = [
-        list(salty_hash(shifttext(_inject_shift, x))) for x in _inject_data_1]
-    _inject_sha_coded = list(salty_hash(shifttext(_inject_shift, _inject_sha)))
+    _inject_data_0_coded = list(salty_hash(_inject_data_0))
+    _inject_data_1_coded = [list(salty_hash(x)) for x in _inject_data_1]
+    _inject_sha_coded = list(salty_hash(_inject_sha))
     _inject_payload_modified = _inject_payload.format(
-        -_inject_shift, _inject_data_0_coded, -_inject_shift, _inject_data_1_coded, -_inject_shift, _inject_sha_coded)
+        _inject_data_0_coded, _inject_data_1_coded, _inject_sha_coded)
     return _inject_payload_modified
 
 
@@ -311,7 +300,7 @@ def GUI():
         print(">> 6. Bật/tắt key")
         print(">> 7. Xóa app")
         print(">> 8. Xóa key")
-        print(">> 9. Thêm verify integrity (Có thể gây lỗi nếu dùng chế độ onefile)")
+        print(">> 9. Thêm verify integrity (Không hỗ trợ onefile)")
         print(">> 10. Set client key")
         print(">> 11. Set server key")
         print(">> 12. Set app hash")
@@ -606,7 +595,8 @@ def GUI():
                 filename = input("> Vui lòng nhập đủ đường dẫn tới file: ")
                 _inject_source(filename)
                 input("> Đã thêm verify integrity thành công.")
-            except:
+            except Exception as e:
+                print(e)
                 input(">> Đã có lỗi xảy ra, vui lòng Enter để về Home page")
                 _done = True
         elif _inp == '10':
