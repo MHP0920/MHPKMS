@@ -246,7 +246,7 @@ for _i in _dt1:
         _sys.exit()
 if _sha512(open(_dt0, 'rb').read()).hexdigest() != _sa:
     _exited = True
-    _sys._exit()
+    _sys.exit()
 while _exited:
     try:
         _sys.exit(0)
